@@ -1,13 +1,17 @@
-import model.Guerreiro;
-import model.Mago;
+import model.*;
+
+import java.util.Scanner;
+
+import static model.Jogador.criarJogador;
 
 public class Arena {
     public static void main(String[] args) {
+        int contador = 0;
 
         Guerreiro guerreiro1 = new Guerreiro("Jefferson", 50, 0, 5);
         Mago mago1 = new Mago("Kevin", 35, 5, 0, 50);
 
-        int contador = 0;
+        Jogador jogador = criarJogador();
 
         // APENAS PARA VER A VIDA INICIAL
         System.out.println("-----------------------------");
