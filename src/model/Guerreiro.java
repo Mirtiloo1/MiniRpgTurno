@@ -18,7 +18,7 @@ public class Guerreiro extends Personagem implements HabilidadeEspecial {
     @Override
     public void usarHabilidade(Personagem alvo) {
         int dano = this.getForca() * 4;
-        System.out.println(nome + "Executa um ataque furioso!");
+        System.out.println(nome + " executa um ataque furioso!");
         this.pontoDeVida -= 25;
         alvo.receberDano(dano);
     }

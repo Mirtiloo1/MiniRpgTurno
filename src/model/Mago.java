@@ -24,9 +24,8 @@ public class Mago extends Personagem implements HabilidadeEspecial {
 
     @Override
     public void usarHabilidade(Personagem alvo) {
-        int dano = this.getMagia() * 4;
-        System.out.println(nome + "Dispara um trovão!");
+        System.out.println(nome + " ativa a benção da cura. +20 de vida");
         this.pontosDeMana -= 8;
-        alvo.receberDano(dano);
+        this.pontoDeVida += 20;
     }
 }
