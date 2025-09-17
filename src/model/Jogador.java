@@ -5,10 +5,18 @@ import java.util.Scanner;
 public class Jogador {
 
     private String nomeJogador;
-    private final Classes classe;
+    private Classes classe;
 
     public Jogador(String nomeJogador, Classes classe) {
         this.nomeJogador = nomeJogador;
+        this.classe = classe;
+    }
+
+    public Classes getClasse() {
+        return this.classe;
+    }
+
+    public void setClasse(Classes classe) {
         this.classe = classe;
     }
 
@@ -33,8 +41,8 @@ public class Jogador {
         Classes classeEscolhida = null;
 
         System.out.println("Bem vindo aos campos de batalha Jogador! Como devo chamá-lo?");
-        String nomeDoJogador = sc.nextLine();
-        System.out.println("\nOlá " + nomeDoJogador + "! Antes de iniciar a batalha, escolha sua classe:");
+        String nomeJogador = sc.nextLine();
+        System.out.println("\nOlá " + nomeJogador + "! Antes de iniciar a batalha, escolha sua classe:");
 
         do{
             System.out.println("1. Mago\n2. Guerreiro");
@@ -55,6 +63,15 @@ public class Jogador {
                     System.out.println("Opção inválida! Tente novamente.");
             }
         }while(classeEscolhida == null);
-        return new Jogador(nomeDoJogador, classeEscolhida);
+        return new Jogador(nomeJogador, classeEscolhida);
+    }
+
+    public static Personagem criarPersonagem(Jogador jogador) {
+        if (jogador.getClasse() == Classes.GUERREIRO){
+            return new Guerreiro(jogador.getNomeJogador(), 50, 0, 5);
+        }else if (jogador.getClasse() == Classes.MAGO){
+            return new Mago(jogador.getNomeJogador(), 35, 5, 0, 50);
+        }
+        return null;
     }
 }

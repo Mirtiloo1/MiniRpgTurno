@@ -1,58 +1,44 @@
 import model.*;
 
-import java.util.Scanner;
-
-import static model.Jogador.criarJogador;
+import static model.Jogador.criarPersonagem;
 
 public class Arena {
     public static void main(String[] args) {
-        int contador = 0;
 
-        Guerreiro guerreiro1 = new Guerreiro("Jefferson", 50, 0, 5);
-        Mago mago1 = new Mago("Kevin", 35, 5, 0, 50);
+        Jogador infoJogador = Jogador.criarJogador();
+        Personagem personagemDoJogador = criarPersonagem(infoJogador);
 
-        Jogador jogador = criarJogador();
+        Personagem oponente = null;
+        if (personagemDoJogador instanceof Guerreiro) {
+            oponente = new Mago("O Temível Kevin", 35, 5, 0, 50);
+        } else if (personagemDoJogador instanceof Mago) {
+            oponente = new Guerreiro("O Brutal Jefferson", 50, 0, 5);
+        }
 
-        // APENAS PARA VER A VIDA INICIAL
-        System.out.println("-----------------------------");
-        System.out.println("Vida do guerreiro: " + guerreiro1.getPontoDeVida());
-        System.out.println("Vida do mago: " + mago1.getPontoDeVida());
-        System.out.println("-----------------------------\n");
+        int turno = 1;
+        while (personagemDoJogador.isVivo() && oponente.isVivo()) {
+            System.out.println("\n---- TURNO " + turno + " ----");
 
-        while(guerreiro1.isVivo() && mago1.isVivo()){
-            contador++;
+            Personagem atacanteAtual;
+            Personagem alvoAtual;
 
-            if(contador % 3 == 0){
-                System.out.println("---- Turno " + contador + "----");
-                System.out.println("---- AMBOS UTILIZAM SUA HABILIDADE ESPECIAL ----\n");
-                guerreiro1.usarHabilidade(mago1);
-                System.out.println("\nLogo em seguida:");
-                mago1.usarHabilidade(mago1);
-
-                System.out.println("-----------------------------");
-                System.out.println("Vida do guerreiro: " + guerreiro1.getPontoDeVida());
-                System.out.println("Vida do mago: " + mago1.getPontoDeVida());
-                System.out.println("-----------------------------");
+            if (turno % 2 != 0){
+                atacanteAtual = personagemDoJogador;
+                alvoAtual = oponente;
             }else{
-                System.out.println("---- Turno " + contador + "----");
-
-                guerreiro1.atacar(mago1);
-                System.out.println("\nMago HP: " + mago1.getPontoDeVida() + "/100\nGuerreiro HP: " + guerreiro1.getPontoDeVida() + "/100\n");
-
-                mago1.atacar(guerreiro1);
-                System.out.println("\nMago HP: " + mago1.getPontoDeVida() + "/100\nGuerreiro HP: " + guerreiro1.getPontoDeVida() + "/100\n");
-
-                if (!mago1.isVivo()){
-                    break;
-                }
+                atacanteAtual = oponente;
+                alvoAtual = personagemDoJogador;
             }
+            atacanteAtual.atacar(alvoAtual);
+
+            System.out.println("---------------------\nStatus:\n" + personagemDoJogador.getNome() + " HP: " + personagemDoJogador.getPontoDeVida() +
+                    "\n" + oponente.getNome() + " HP: " + oponente.getPontoDeVida() + "\n---------------------");
+            turno ++;
         }
-        System.out.println("\nFim do X1!");
-        if(!mago1.isVivo()){
-            System.out.println(mago1.getNome() + " (Guerreiro) é o vencedor!");
-        }
-        else{
-            System.out.println(guerreiro1.getNome() + " (Mago) é o vencedor!");
+        if (personagemDoJogador.isVivo()) {
+            System.out.println("Você venceu!!");
+        }else if(!personagemDoJogador.isVivo()){
+            System.out.println(oponente.getNome() + " Venceu!");
         }
     }
 }

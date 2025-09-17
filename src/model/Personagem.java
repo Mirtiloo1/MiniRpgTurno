@@ -38,5 +38,5 @@ public abstract class Personagem {
         return this.pontoDeVida > 0;
     }
 
-    abstract void atacar(Personagem alvo);
+    public abstract void atacar(Personagem alvo);
 }
