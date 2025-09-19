@@ -4,7 +4,6 @@ import static model.Jogador.criarPersonagem;
 
 public class Arena {
     public static void main(String[] args) {
-
         Jogador infoJogador = Jogador.criarJogador();
         Personagem personagemDoJogador = criarPersonagem(infoJogador);
 

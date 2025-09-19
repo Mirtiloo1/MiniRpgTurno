@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Jogador {
 
@@ -37,6 +37,7 @@ public class Jogador {
     }
 
     public static Jogador criarJogador() {
+
         Scanner sc = new Scanner(System.in);
         Classes classeEscolhida = null;
 
@@ -45,28 +46,25 @@ public class Jogador {
         System.out.println("\nOlá " + nomeJogador + "! Antes de iniciar a batalha, escolha sua classe:");
 
         do{
-            System.out.println("1. Mago\n2. Guerreiro");
-            int escolha = sc.nextInt();
-            if(escolha != 1 && escolha != 2){
-                System.out.println("Opção inválida! Tente novamente!");
+            List<Classes> listaDeClasses = List.of(Classes.values());
+            for(int i = 0; i < listaDeClasses.size(); i++){
+                System.out.println(i + 1 + ". " + listaDeClasses.get(i).toString());
             }
-            switch(escolha){
-                case 1:
-                    classeEscolhida = Classes.MAGO;
-                    System.out.println("Você escolheu a classe Mago!");
-                    break;
-                case 2:
-                    classeEscolhida = Classes.GUERREIRO;
-                    System.out.println("Você escolheu a classe Guerreiro!");
-                    break;
-                default:
-                    System.out.println("Opção inválida! Tente novamente.");
+            int escolha = sc.nextInt();
+
+            for (Classes listaDeClass : listaDeClasses) {
+                int classePercorrida = listaDeClass.ordinal() + 1;
+                if (escolha == classePercorrida) {
+                    System.out.println("Você escolheu a classe: " + listaDeClass);
+                    classeEscolhida = listaDeClass;
+                }
             }
         }while(classeEscolhida == null);
         return new Jogador(nomeJogador, classeEscolhida);
     }
 
     public static Personagem criarPersonagem(Jogador jogador) {
+
         if (jogador.getClasse() == Classes.GUERREIRO){
             return new Guerreiro(jogador.getNomeJogador(), 50, 0, 5);
         }else if (jogador.getClasse() == Classes.MAGO){
