@@ -64,12 +64,6 @@ public class Jogador {
     }
 
     public static Personagem criarPersonagem(Jogador jogador) {
-
-        if (jogador.getClasse() == Classes.GUERREIRO){
-            return new Guerreiro(jogador.getNomeJogador(), 50, 0, 5);
-        }else if (jogador.getClasse() == Classes.MAGO){
-            return new Mago(jogador.getNomeJogador(), 35, 5, 0, 50);
-        }
-        return null;
-    }
+        return jogador.getClasse().criarPersonagem(jogador.getNomeJogador());
+    };
 }

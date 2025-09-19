@@ -1,4 +1,6 @@
 import model.*;
+import model.classes.Guerreiro;
+import model.classes.Mago;
 
 import static model.Jogador.criarPersonagem;
 
@@ -9,9 +11,9 @@ public class Arena {
 
         Personagem oponente = null;
         if (personagemDoJogador instanceof Guerreiro) {
-            oponente = new Mago("O Temível Kevin", 35, 5, 0, 50);
+            oponente = new Mago();
         } else if (personagemDoJogador instanceof Mago) {
-            oponente = new Guerreiro("O Brutal Jefferson", 50, 0, 5);
+            oponente = new Guerreiro();
         }
 
         int turno = 1;
@@ -30,8 +32,8 @@ public class Arena {
             }
             atacanteAtual.atacar(alvoAtual);
 
-            System.out.println("---------------------\nStatus:\n" + personagemDoJogador.getNome() + " HP: " + personagemDoJogador.getPontoDeVida() +
-                    "\n" + oponente.getNome() + " HP: " + oponente.getPontoDeVida() + "\n---------------------");
+            System.out.println("---------------------\nStatus:\n" + personagemDoJogador.getNome() + " HP: " + personagemDoJogador.getVida() +
+                    "\n" + oponente.getNome() + " HP: " + oponente.getVida() + "\n---------------------");
             turno ++;
         }
         if (personagemDoJogador.isVivo()) {

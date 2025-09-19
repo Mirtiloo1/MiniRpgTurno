@@ -2,17 +2,18 @@ package model;
 
 public abstract class Personagem {
 
-    protected String nome;
-    protected int pontoDeVida;
-    protected int magia;
-    protected int forca;
+    public String nome;
+    public int vida;
+    public int magia;
+    public int forca;
+    public int mana;
 
     public String getNome() {
         return nome;
     }
 
-    public int getPontoDeVida() {
-        return pontoDeVida;
+    public int getVida() {
+        return vida;
     }
 
     public int getMagia() {
@@ -23,19 +24,24 @@ public abstract class Personagem {
         return forca;
     }
 
-    public Personagem(String nome, int pontoDeVida, int magia, int forca) {
+    public int getMana() {
+        return mana;
+    }
+
+    public Personagem(String nome, int vida, int magia, int forca, int mana) {
         this.nome = nome;
-        this.pontoDeVida = pontoDeVida;
+        this.vida = vida;
         this.magia = magia;
         this.forca = forca;
+        this.mana = mana;
     }
 
     public void receberDano(int dano){
-            this.pontoDeVida -= dano;
+            this.vida -= dano;
     }
 
     public boolean isVivo(){
-        return this.pontoDeVida > 0;
+        return this.vida > 0;
     }
 
     public abstract void atacar(Personagem alvo);

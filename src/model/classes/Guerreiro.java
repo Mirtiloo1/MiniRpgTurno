@@ -1,11 +1,12 @@
-package model;
+package model.classes;
 
 import game.habilidades.HabilidadeEspecial;
+import model.Personagem;
 
 public class Guerreiro extends Personagem implements HabilidadeEspecial {
 
-    public Guerreiro(String nome, int pontosDeVida, int magia, int forca) {
-        super(nome, pontosDeVida, magia, forca);
+    public Guerreiro(String nome, int vida, int magia, int forca, int mana){
+        super(nome, vida, magia, forca, mana);
     }
 
     @Override
@@ -19,7 +20,7 @@ public class Guerreiro extends Personagem implements HabilidadeEspecial {
     public void usarHabilidade(Personagem alvo) {
         int dano = this.getForca() * 4;
         System.out.println(nome + " executa um ataque furioso!");
-        this.pontoDeVida -= 25;
+        this.vida -= 25;
         alvo.receberDano(dano);
     }
 }
